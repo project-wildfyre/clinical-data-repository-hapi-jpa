@@ -106,12 +106,17 @@ public class FHIRCDRConformanceProvider extends JpaConformanceProviderDstu3 {
             }
         }
 
-        if (capabilityStatement.hasImplementation()) {
-            capabilityStatement.getImplementation().setDescription(HapiProperties.getSoftwareImplementationDesc());
+        capabilityStatement.getSoftware().setName(HapiProperties.getSoftwareName());
+        capabilityStatement.getSoftware().setVersion(HapiProperties.getSoftwareVersion());
+        capabilityStatement.getImplementation().setDescription(HapiProperties.getSoftwareImplementationDesc());
+        capabilityStatement.getImplementation().setUrl(HapiProperties.getSoftwareImplementationUrl());
+        // KGM only add if not already present
+        if (capabilityStatement.getImplementationGuide().size() == 0) {
+            capabilityStatement.getImplementationGuide().add(new UriType(HapiProperties.getSoftwareImplementationGuide()));
+
         }
-        if (capabilityStatement.hasSoftware()) {
-            capabilityStatement.getSoftware().setName(HapiProperties.getSoftwareName());
-        }
+        capabilityStatement.setPublisher("NHS Digital & Project Wildfyre");
+
         capabilityStatement.setPublisher("Project Wildfyre");
         return  capabilityStatement;
     }

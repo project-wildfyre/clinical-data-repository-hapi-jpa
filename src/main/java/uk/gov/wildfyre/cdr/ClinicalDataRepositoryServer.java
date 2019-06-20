@@ -36,7 +36,6 @@ public class ClinicalDataRepositoryServer extends SpringBootServletInitializer {
 
         System.setProperty("hawtio.authenticationEnabled", "false");
         System.setProperty("management.security.enabled","false");
-        System.setProperty("server.port", "8188");
         System.setProperty("management.contextPath","");
 
         SpringApplication.run(ClinicalDataRepositoryServer.class, args);

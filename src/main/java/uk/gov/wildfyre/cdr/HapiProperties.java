@@ -11,6 +11,10 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class HapiProperties {
+
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(HapiProperties.class);
+
     static final String ALLOW_EXTERNAL_REFERENCES = "allow_external_references";
     static final String ALLOW_MULTIPLE_DELETE = "allow_multiple_delete";
     static final String ALLOW_PLACEHOLDER_REFERENCES = "allow_placeholder_references";
@@ -50,7 +54,9 @@ public class HapiProperties {
 
     static final String SOFTWARE_NAME = "software.name";
     static final String SOFTWARE_VERSION = "software.version";
-    static final String SOFTWARE_IMPLEMENTATION_DESC = "software.implementation";
+    static final String SOFTWARE_IMPLEMENTATION_DESC = "software.implementation.desc";
+    static final String SOFTWARE_IMPLEMENTATION_URL = "software.implementation.url";
+    static final String SOFTWARE_IMPLEMENTATION_GUIDE = "software.implementation.guide";
 
     static final String VALIDATION_FLAG = "validate.flag";
     static final String VALIDATION_SERVER = "validation.server";
@@ -129,7 +135,17 @@ public class HapiProperties {
 
     private static String getProperty(String propertyName) {
         Properties properties = HapiProperties.getProperties();
-
+        log.trace("Looking for property = " + propertyName);
+        if (System.getenv(propertyName)!= null) {
+            String value= System.getenv(propertyName);
+            log.debug("System Environment property Found " + propertyName+ " = "+ value);
+            return value;
+        }
+        if (System.getProperty(propertyName)!= null) {
+            String value= System.getenv(propertyName);
+            log.debug("System Property Found " + propertyName+ " = "+ value);
+            return value;
+        }
         if (properties != null) {
             return properties.getProperty(propertyName);
         }
@@ -362,9 +378,6 @@ public class HapiProperties {
         return HapiProperties.getProperty(SOFTWARE_VERSION);
     }
 
-    public static String getSoftwareImplementationDesc() {
-        return HapiProperties.getProperty(SOFTWARE_IMPLEMENTATION_DESC);
-    }
 
     public static Boolean getValidationFlag() {
         return HapiProperties.getBooleanProperty(VALIDATION_FLAG, false);
@@ -410,4 +423,15 @@ public class HapiProperties {
         return HapiProperties.getProperty(SECURITY_OAUTH_SCOPE);
     }
 
+    public static String getSoftwareImplementationDesc() {
+        return HapiProperties.getProperty(SOFTWARE_IMPLEMENTATION_DESC);
+    }
+
+    public static String getSoftwareImplementationUrl() {
+        return HapiProperties.getProperty(SOFTWARE_IMPLEMENTATION_URL);
+    }
+
+    public static String getSoftwareImplementationGuide() {
+        return HapiProperties.getProperty(SOFTWARE_IMPLEMENTATION_GUIDE);
+    }
 }

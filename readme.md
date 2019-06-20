@@ -20,6 +20,15 @@ sudo bin/plugin install analysis-phonetic
 windows 
 .\elasticsearch-plugin install analysis-phonetic
 
+## docker build
+
+docker build . -t wildfyre-cdr
+
+docker tag wildfyre-cdr thorlogic/wildfyre-cdr
+
+docker push thorlogic/wildfyre-cdr
+
+
 
 
 

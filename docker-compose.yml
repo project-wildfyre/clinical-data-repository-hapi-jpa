@@ -1,0 +1,74 @@
+version: '2.1'
+
+services:
+
+# Wildfyre HAPI JPA Server
+
+  cdrsql:
+    container_name: cdrsql
+    image: postgres:11.3
+    volumes:
+      - sfs-postgres:/var/lib/postgresql/data
+    environment:
+     - POSTGRES_DB=cdr
+     - POSTGRES_USER=${MYSQL_DB_USER}
+     - POSTGRES_PASSWORD=${MYSQL_DB_PASSWORD}
+    ports:
+     - 5434:5432
+    networks:
+     - cdr_net
+
+  wildfyre-elasticsearch:
+    container_name: wildfyre-elasticsearch
+    image: thorlogic/wildfyre-elasticsearch${IMAGE_TAG}
+    volumes:
+      - wf-elastic:/var/lib/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - cdr_net
+
+  wildfyre-cdr:
+    container_name: wildfyre-cdr
+    image: thorlogic/wildfyre-cdr${IMAGE_TAG}
+    depends_on:
+      - cdrsql
+      - wildfyre-elasticsearch
+    links:
+      - cdrsql
+    environment:
+      - datasource.username=${MYSQL_DB_USER}
+      - datasource.password=${MYSQL_DB_PASSWORD}
+      - datasource.driver=org.postgresql.Driver
+      - datasource.url=jdbc:postgresql://cdrsql:5432/cdr
+      - datasource.showSql=false
+      - datasource.showDdl=false
+      - datasource.dialect=org.hibernate.dialect.PostgreSQL9Dialect
+      - hibernate.search.default.elasticsearch.host=http://wildfyre-elasticsearch:9200
+    ports:
+      - 8189:8189
+    extra_hosts:
+      # Define an alias to loop back for REST Connections
+      - "${FHIR_SERVER_BASE_HOST}:127.0.0.1"
+    volumes:
+      - tomcat-log-volume:/usr/local/tomcat/logs
+    networks:
+      - cdr_net
+
+# Data Load imports a set of sample data into the reference implementation (optional)
+
+
+
+
+volumes:
+  tomcat-log-volume:
+  tie-log-volume:
+  wf-elastic:
+  sqlvol:
+  sfs-postgres :
+
+networks:
+  cdr_net:
+    driver: bridge
+
+
