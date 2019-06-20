@@ -1,0 +1,1 @@
+java -jar "-Dhapi.properties=hapilive.properties" target/fhircdr.jar
