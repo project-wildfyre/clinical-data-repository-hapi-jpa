@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import uk.gov.wildfyre.cdr.support.CorsFilter;
 
 import java.util.HashMap;
@@ -26,6 +27,7 @@ import java.util.Map;
 @SpringBootApplication(exclude = {ElasticsearchAutoConfiguration.class, DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableTransactionManagement()
 @ServletComponentScan
+@EnableSwagger2
 public class ClinicalDataRepositoryServer extends SpringBootServletInitializer {
 
     @Autowired
@@ -58,7 +60,6 @@ public class ClinicalDataRepositoryServer extends SpringBootServletInitializer {
         registration.setLoadOnStartup(1);
         return registration;
     }
-
 
 
     @Bean

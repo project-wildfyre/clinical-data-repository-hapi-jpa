@@ -16,7 +16,6 @@ import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.hibernate.search.elasticsearch.cfg.ElasticsearchEnvironment;
 import org.hl7.fhir.instance.model.Subscription;
 
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,9 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import ca.uhn.fhir.jpa.config.BaseJavaConfigDstu3;
 import ca.uhn.fhir.jpa.dao.DaoConfig;
-import ca.uhn.fhir.rest.server.interceptor.IServerInterceptor;
-import ca.uhn.fhir.rest.server.interceptor.LoggingInterceptor;
-import ca.uhn.fhir.rest.server.interceptor.ResponseHighlighterInterceptor;
+
 import java.sql.Driver;
 
 /**
