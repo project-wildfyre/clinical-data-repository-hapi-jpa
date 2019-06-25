@@ -41,7 +41,7 @@ public class OpenAPIService {
 
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(OpenAPIService.class);
 
-    @RequestMapping("/uk/gov/wildfyre/cdr/apidocs")
+    @RequestMapping("/apidocs")
     public String greeting() {
         HttpClient client = getHttpClient();
 

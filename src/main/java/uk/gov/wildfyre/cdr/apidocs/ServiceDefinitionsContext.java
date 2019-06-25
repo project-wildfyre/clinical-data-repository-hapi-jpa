@@ -15,7 +15,7 @@ public class ServiceDefinitionsContext {
 
         List<SwaggerResource> resources = new ArrayList<>();
         SwaggerResource resource = new SwaggerResource();
-        resource.setLocation("/uk/gov/wildfyre/cdr/apidocs");
+        resource.setLocation("/apidocs");
         resource.setName(HapiProperties.getServerName());
         resource.setSwaggerVersion("2.0");
         resources.add(resource);
