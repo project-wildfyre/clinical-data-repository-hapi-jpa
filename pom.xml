@@ -49,7 +49,7 @@
         <junit-version>4.12</junit-version>
         <cucumber-version>1.2.5</cucumber-version>
         <ebay_cors_filter_version>1.0.1</ebay_cors_filter_version>
-        <jackson_version>2.9.8</jackson_version>
+        <jackson_version>2.11.0</jackson_version>
 
         <start-class>uk.gov.wildfyre.cdr.ClinicalDataRepositoryServer</start-class>
     </properties>
