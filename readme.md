@@ -11,6 +11,8 @@ elastic 6.8 (see instructions below to install pluggin)
 
 java 11
 
+maven
+
 
 ## Elastic Instructions
 
@@ -19,6 +21,10 @@ sudo bin/plugin install analysis-phonetic
 
 windows 
 .\elasticsearch-plugin install analysis-phonetic
+
+## project build
+
+mvn clean install
 
 ## docker build
 
